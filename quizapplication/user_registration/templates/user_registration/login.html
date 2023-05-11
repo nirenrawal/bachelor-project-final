@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div><a href="{% url 'user_registration:index' %}">Home</a>
-        <a href="{% url 'user_registration:register' %}">Signup</a>
-    
-        {% if user.is_authenticated %}
-            <a href="{% url 'user_registration:user_logout' %}">Logout</a>         
-            {% else %}
-            <a href="{% url 'user_registration:user_login' %}">Login</a>
-            {% endif %}</div>
+{% extends "user_registration/base.html" %}
+{% load static %}
+    {% block description %}You can login to quiz application from here{% endblock%}
+    {% block robots %}index, follow {% endblock %}
+    {% block keywords %}Login, Quiz Application{% endblock %}
+    {% block css %} {% static "user_registration/login.css" %} {% endblock %}
+    {% block title %}Login{% endblock %}
+    {% block body %}
+    {% include 'includes/nav.html' %}
+
     <section>
         <h1 class="title">Please Login!</h1>
     <form action="{% url 'user_registration:user_login' %}" method="POST">
@@ -28,5 +21,4 @@
         <input type="submit" value="Login">
     </form>
     </section>
-</body>
-</html>
+    {% endblock %}

@@ -1,18 +1,25 @@
-from django.shortcuts import render
-from .forms import UserForm, UserInfoForm
-
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.urls import reverse
+
+from .forms import UserForm, UserInfoForm
+from .models import UserInfo
 
 # Create your views here.
 """This function renders homepage"""
+
+
 def index(request):
     return render(request, "user_registration/index.html")
 
 
 """This function registers the user."""
+
+
 def register(request):
     registered = False
 
@@ -34,6 +41,7 @@ def register(request):
             info.save()
 
             registered = True
+            return redirect(reverse("user_registration:user_login"))
 
         else:
             print(user_form.errors, info_form.errors)
@@ -49,6 +57,8 @@ def register(request):
 
 
 """This function logs in"""
+
+
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -69,7 +79,47 @@ def user_login(request):
 
 
 """This function logs out"""
+
+
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse("user_registration:index"))
+
+
+"""This function renders profile"""
+
+
+@login_required
+def user_profile(request, id):
+    try:
+        user = User.objects.get(id=id)
+        user_info = UserInfo.objects.get(user=user)
+        return render(
+            request,
+            "user_registration/user_profile.html",
+            {"user": user, "user_info": user_info},
+        )
+    except UserInfo.DoesNotExist:
+        return redirect("user_registration:user_login")
+
+
+"""This function updates the password"""
+
+
+@login_required
+def change_password(request, id):
+    id = request.user.id
+    if request.method == "POST":
+        password_form = PasswordChangeForm(request.user, request.POST)
+        if password_form.is_valid():
+            user = password_form.save()
+            update_session_auth_hash(request, user)
+            return redirect("user_registration:user_profile", id)
+    else:
+        password_form = PasswordChangeForm(request.user)
+    return render(
+        request,
+        "user_registration/change_password.html",
+        {"password_form": password_form},
+    )
