@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 
 from .forms import UserForm, UserInfoForm
@@ -123,3 +123,21 @@ def change_password(request, id):
         "user_registration/change_password.html",
         {"password_form": password_form},
     )
+
+
+"""This function updates the image on profile page"""
+def upload_profile_image(request, id):
+    user = get_object_or_404(User, id=id)
+    try:
+        user_info = UserInfo.objects.get(user=user)
+    except UserInfo.DoesNotExist:
+        user_info = UserInfo(user=user)
+        user_info.save()
+    if request.method == 'POST':
+        form = UserInfoForm(request.POST, request.FILES, instance=user_info)
+        if form.is_valid():
+            form.save()
+            return redirect('user_registration:user_profile', id=id)
+    else:
+        form = UserInfoForm(instance=user_info)
+    return render(request, 'user_registration/upload_profile_image.html', {'form':form})
