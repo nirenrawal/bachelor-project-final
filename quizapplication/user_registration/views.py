@@ -6,8 +6,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 
+
 from .forms import UserForm, UserInfoForm
 from .models import UserInfo
+from django import forms
 
 # Create your views here.
 """This function renders homepage"""
@@ -127,6 +129,7 @@ def change_password(request, id):
 
 """This function updates the image on profile page"""
 def upload_profile_image(request, id):
+    from .forms import UserInfoForm
     user = get_object_or_404(User, id=id)
     try:
         user_info = UserInfo.objects.get(user=user)
@@ -141,3 +144,48 @@ def upload_profile_image(request, id):
     else:
         form = UserInfoForm(instance=user_info)
     return render(request, 'user_registration/upload_profile_image.html', {'form':form})
+
+
+"""This function updates profile page"""
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+
+
+class UserInfoForm(forms.ModelForm):
+    profile_image = forms.ImageField(required=False)
+    class Meta:
+        model = UserInfo
+        fields = ('address', 'phone')
+        
+
+@login_required
+def update_profile(request, id):
+    user = get_object_or_404(User, id=id)
+    user_info = get_object_or_404(UserInfo, user=user)
+
+    user_form = UserUpdateForm(instance=user)
+    info_form = UserInfoForm(instance=user_info)
+
+    if request.method == "POST":
+        user_form = UserUpdateForm(request.POST, instance=user)
+        info_form = UserInfoForm(request.POST, instance=user_info)
+
+        if user_form.is_valid() and info_form.is_valid():
+            user_obj = user_form.save(commit=False)
+            user_obj.username = user.username
+            user_obj.email = user.email
+            user_obj.password = user.password
+            user_obj.save()
+
+            info_form.save()
+
+            return redirect("user_registration:user_profile", id=id)
+
+    return render(
+        request,
+        "user_registration/update_profile.html",
+        {"user_form": user_form, "info_form": info_form},
+    )
