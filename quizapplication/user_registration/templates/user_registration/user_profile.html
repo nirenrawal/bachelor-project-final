@@ -12,5 +12,6 @@
   {% if user_info.profile_image %}
     <img width=100 src="{{ user_info.profile_image.url }}" alt="{{ user.get_full_name }} Profile Image">
     <p><a href="{% url 'user_registration:upload_profile_image' user.id %}">change image</a></p>
+    <p><a href="{% url 'user_registration:update_profile' user.id %}">Update Profile</a></p>
 {% endif %}
 {% endblock %}
