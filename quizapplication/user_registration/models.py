@@ -9,7 +9,7 @@ class UserInfo(models.Model):
     phone = models.CharField(max_length=15, blank=True)
 
     #Profile image
-    profile_image = models.ImageField(upload_to='profile_image', blank=True)
+    profile_image = models.ImageField(upload_to='profile_image', blank=True, default='image/default-image.jpeg')
 
     def __str__(self):
         return self.user.username
