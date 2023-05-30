@@ -1,8 +1,10 @@
 {% extends 'user_registration/base.html' %}
 {% load static %}
-{% block css %} {% static "user_registration/register.css" %} {% endblock %}
+{% comment %} {% block css %} {% static "user_registration/user-profile.css" %} {% endblock %} {% endcomment %}
 {% block body %}
-{% include 'includes/nav.html' %}
+{% comment %} {% include 'includes/nav.html' %} {% endcomment %}
+
+<div class="user-profile">
     <h1 class="title">User Profile </h1>
     <p><strong>Username:</strong> @<em>{{ user.username }}</em></p>
     <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
@@ -10,8 +12,11 @@
     <p><strong>Address:</strong> {{ user_info.address }}</p>
     <p><strong>Phone:</strong> {{ user_info.phone }}</p>
   {% if user_info.profile_image %}
-    <img width=100 src="{{ user_info.profile_image.url }}" alt="{{ user.get_full_name }} Profile Image">
-    <p><a href="{% url 'user_registration:upload_profile_image' user.id %}">change image</a></p>
+    <img width=200 src="{{ user_info.profile_image.url }}" alt="{{ user.get_full_name }} Profile Image">
+    <p><a href="{% url 'user_registration:upload_profile_image' user.id %}">Change Image</a></p>
     <p><a href="{% url 'user_registration:update_profile' user.id %}">Update Profile</a></p>
 {% endif %}
 {% endblock %}
+
+
+</div>
