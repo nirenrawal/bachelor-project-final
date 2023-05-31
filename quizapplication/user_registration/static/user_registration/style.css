@@ -84,6 +84,18 @@ input {
     margin: 15px 0 30px 0;
 }
 
+textarea {
+    max-width: 94%;
+    min-width: 94%;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: none;
+    margin: 15px 0 30px 0;
+}
+
+
+
 
 /* input submit button */
 input[type="submit"] {
@@ -133,6 +145,10 @@ input[type="submit"]:hover {
     
 }
 
+.user-profile a:hover {
+    background-color: #4c0dde;
+}
+
 /* index page */
 
 .index-page {
@@ -145,6 +161,11 @@ input[type="submit"]:hover {
 .welcome-section {
     padding: 10px;
     width: 500px;
+}
+
+.welcome-section h1{
+    font-size: 40px;
+    padding-bottom: 30px;
 }
 
 .index-images img {
@@ -207,4 +228,21 @@ input[type="submit"]:hover {
 
 .title {
     text-align: center;
+}
+
+
+/* Upload Image */
+.upload-image button {
+    background-color: #3d3d3d;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #d6e7e7;
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+
+
+.upload-image button:hover {
+    background-color: #4c0dde;
 }

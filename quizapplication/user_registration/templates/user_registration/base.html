@@ -17,7 +17,8 @@
 </head>
 <body>
     <header>
-        <img src="{% static "image/logo-no-background.svg" %}" width="90" alt="myshop logo">
+        <a href="{% url 'user_registration:index' %}"><img src="{% static "image/logo-no-background.svg" %}" width="50" alt="myshop logo"></a>
+        
         <nav class="main-nav">
            
             <a href="{% url 'user_registration:index' %}" >Home</a>
