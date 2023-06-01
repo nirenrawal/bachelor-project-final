@@ -13,6 +13,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+<!-- fontawsome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -28,7 +34,16 @@
             <a href="{% url 'user_registration:user_profile' user.id %}">Profile</a>
             <a href="{% url 'user_registration:user_logout' %}">Logout</a>
             <a href="{% url 'user_registration:change_password' user.id %}">Change Password</a>
+            {% comment %} <a href="{% url 'quiz:create_quiz_category' %}">Create Quiz Category</a>
+            <a href="{% url 'quiz:add_quiz_question' %}">Create Quiz Category</a> {% endcomment %}
             
+            <div class="dropdown">
+                <a href="#">Quiz <i class="fa fa-sort-down"></i> </a>
+                <div class="dropdown-content">
+                    <p><a class='dropdown-link' href="{% url 'quiz:create_quiz_category' %}">Create Category</a></p>
+                    <p><a class='dropdown-link' href="{% url 'quiz:add_quiz_question' %}">Add Questions</a></p>
+                </div>
+            </div>
             
             {% else %}
             <a href="{% url 'user_registration:register' %}">Signup</a>
@@ -52,6 +67,8 @@
             </svg>
         </nav>
     </header> 
+
+
    
     
     {% block body %}{% endblock %}
