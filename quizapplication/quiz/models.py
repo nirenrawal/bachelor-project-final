@@ -5,25 +5,36 @@ from django.db import models
 class QuizCategory(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+    number_of_questions = models.IntegerField(default=1)
+    time = models.IntegerField(help_text="Duration in Seconds", default=1)
     
     class Meta:
         verbose_name_plural = "quiz catogeries"
     
     def __str__(self):
         return self.name
+    
+    def get_question(self):
+        return self.question_set.all()
 
 
 class Question(models.Model):
     content = models.CharField(max_length=255)
-    quiz_subject = models.ForeignKey(QuizCategory, on_delete=models.CASCADE)
-    number_of_questions = models.IntegerField(default=1)
-    time = models.IntegerField(help_text="Duration in Seconds", default=1)
+    quiz_category = models.ForeignKey(QuizCategory, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.content
+        return f"{self.content} ----------------------------- {self.quiz_category}"
     
     def get_answers(self):
         return self.answer_set.all()
+    
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            num_existing_questions = Question.objects.filter(quiz_category=self.quiz_category).count()
+            if num_existing_questions >= self.quiz_category.number_of_questions:
+                raise ValueError(f"You cannot create more questions then {self.quiz_category.number_of_questions} questions in this category.")
+        super().save(*args, **kwargs)
+            
     
     
 class Answer(models.Model):

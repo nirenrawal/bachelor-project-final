@@ -1,0 +1,16 @@
+{% include 'user_registration/base.html' %}
+
+<h1 class="title">Add Quiz Questions</h1>
+
+<form id="question-form" action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Add">
+</form>
+
+<div id='error_msg' class='error-msg'>{{error_msg}}</div>
+
+
+
+
+
