@@ -1,0 +1,19 @@
+{% include 'user_registration/base.html' %}
+
+    {% block body %}
+   
+<section class='index-page'>
+    
+    <div class="welcome-section">
+        <h1 class="title">Welcome {{ user.first_name | capfirst}} to Quiz Application!</h1>
+        <h3>Play Online Quiz And Have Fun With Your Family & Friends</h3>
+    <input class type="text" placeholder='@User name'>
+    <button class="sm-button">Get Started</button>
+    </div>
+
+    <div style="background-color:red; width:500px; border: 5px solid black; color: white; text-align:center;font-size:50px;">
+        <p>The is were the content is going to be</p>
+    </div>
+    
+</section>
+{% endblock body %}

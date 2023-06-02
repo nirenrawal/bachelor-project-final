@@ -145,4 +145,4 @@ STATICFILES_DIRS = [
 ]
 
 # Login url
-LOGIN_URL = '/user_registration/user_login'
+LOGIN_URL = 'user_registration:user_login'

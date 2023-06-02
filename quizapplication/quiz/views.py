@@ -1,8 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .form import QuizCategoryForm, QuestionForm
-from .models import Question
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
+def quiz_index(request):
+    return render(request, "quiz/quiz_index.html")
 
 """ This function creates quiz category """
 def create_quiz_category(request):
