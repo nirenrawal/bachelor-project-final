@@ -1,19 +1,64 @@
-{% include 'user_registration/base.html' %}
+{% include 'user_registration/base.html' %} 
 
-    {% block body %}
-   
-<section class='index-page'>
-    
-    <div class="welcome-section">
-        <h1 class="title">Welcome {{ user.first_name | capfirst}} to Quiz Application!</h1>
-        <h3>Play Online Quiz And Have Fun With Your Family & Friends</h3>
-    <input class type="text" placeholder='@User name'>
+<style>
+  .success-alert {
+    margin: 0 auto;
+    color: #155724;
+    border-color: #c3e6cb;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    display: none;
+    text-align: center;
+  }
+</style>
+{% block body %}
+
+<div class="success-alert" id="success-alert">
+  {% if messages %} 
+    {% for message in messages %} 
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+        {{message}}
+      {% endif %} 
+    {% endfor %} 
+  {% endif %}
+</div>
+
+<section class="index-page">
+  
+
+  <div class="welcome-section">
+    <h1 class="title">
+      Welcome {{ user.first_name | capfirst}} to Quiz Application!
+    </h1>
+    <h3>Play Online Quiz And Have Fun With Your Family & Friends</h3>
+    <input class type="text" placeholder="@User name" />
     <button class="sm-button">Get Started</button>
-    </div>
+  </div>
 
-    <div style="background-color:red; width:500px; border: 5px solid black; color: white; text-align:center;font-size:50px;">
-        <p>The is were the content is going to be</p>
-    </div>
-    
+  <div
+    style="
+      background-color: red;
+      width: 500px;
+      border: 5px solid black;
+      color: white;
+      text-align: center;
+      font-size: 50px;
+    "
+  >
+    <p>The is were the content is going to be</p>
+  </div>
 </section>
-{% endblock body %}
+{% endblock %}
+
+<script>
+  window.addEventListener('load', function() {
+      const errorMessage = document.getElementById('success-alert');
+      if (errorMessage.innerHTML.trim() !== "") {
+          errorMessage.style.display = "block";
+          setTimeout(function() {
+              errorMessage.style.display = "none";
+          }, 1000);
+      }
+  });
+</script>

@@ -39,6 +39,8 @@ def register(request):
 
             if "profile_image" in request.FILES:
                 info.profile_image = request.FILES["profile_image"]
+            else:
+                info.profile_image = "image/no-image.svg"
 
             info.save()
 
@@ -57,6 +59,12 @@ def register(request):
         {"user_form": user_form, "info_form": info_form, "registered": registered},
     )
 
+
+@login_required
+def show_users (request):
+    users = User.objects.all()
+    return render(request, "user_registration/user_profile.html", {'users':users})
+        
 
 """This function logs in"""
 
@@ -189,3 +197,7 @@ def update_profile(request, id):
         "user_registration/update_profile.html",
         {"user_form": user_form, "info_form": info_form},
     )
+    
+    
+   
+        

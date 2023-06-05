@@ -3,9 +3,9 @@
 {% block description %}Sign up for a new account{% endblock%}
     {% block robots %}register, follow {% endblock %}
     {% block keywords %}Signup, Quiz Application{% endblock %}
-    {% comment %} {% block css %} {% static "user_registration/login.css" %} {% endblock %} {% endcomment %}
     {% block title %}Signup{% endblock %}
     {% block body %}
+
     <h1 class="title">Please fill the form and Register</h1>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -14,4 +14,5 @@
 
         <input type="submit" value="Register">
     </form>
+    
 {% endblock %}

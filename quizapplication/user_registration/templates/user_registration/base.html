@@ -26,18 +26,12 @@
         <a href="{% url 'user_registration:index' %}"><img src="{% static "image/logo-no-background.svg" %}" width="50" alt="myshop logo"></a>
         
         <nav class="main-nav">
-           
-            {% comment %} <a href="{% url 'user_registration:index' %}" >Home</a> {% endcomment %}
             
-    
             {% if user.is_authenticated %}
             <a href="{% url 'quiz:quiz_index' %}" >Quiz Home</a>
             <a href="{% url 'user_registration:user_profile' user.id %}">Profile</a>
             <a href="{% url 'user_registration:user_logout' %}">Logout</a>
             <a href="{% url 'user_registration:change_password' user.id %}">Change Password</a>
-            {% comment %} <a href="{% url 'quiz:create_quiz_category' %}">Create Quiz Category</a>
-            <a href="{% url 'quiz:add_quiz_question' %}">Create Quiz Category</a> {% endcomment %}
-            
             <div class="dropdown">
                 <a href="#">Quiz <i class="fa fa-sort-down"></i> </a>
                 <div class="dropdown-content">

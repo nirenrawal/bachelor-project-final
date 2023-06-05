@@ -1,0 +1,113 @@
+{% include 'user_registration/base.html' %}
+<style>
+    .error-alert {
+        margin: 0 auto;
+        color: #e30d0d;
+        border-color: #f36464;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        text-align: center;
+        display: none;
+      }
+
+      .success-alert {
+        margin: 0 auto;
+        color: #155724;
+        border-color: #c3e6cb;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        display: none;
+        text-align: center;
+      }
+</style> 
+
+{% block body %}
+<div class="success-alert" id="success-alert">
+    {% if messages %} 
+      {% for message in messages %} 
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+          {{message}}
+        {% endif %} 
+      {% endfor %} 
+    {% endif %}
+  </div> 
+  <div class="error-alert" id="error-alert">
+    {% if messages %} 
+      {% for message in messages %} 
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+          {{message}}
+        {% endif %} 
+      {% endfor %} 
+    {% endif %}
+  </div> 
+
+
+    <h1 class="title">Quiz Questions</h1>
+    <a class='back-button' href="{% url 'quiz:add_quiz_question' %}">Back</a>
+    <table class="quiz-question-view">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Category</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+            <tr>
+                <td>{{ question.content }}</td>
+                <td style="text-align:center;">{{ question.quiz_category }}</td>
+                <td style="text-align:center;">
+                    <form style="
+                        width: 30px;
+                        background-color: none;
+                        border: none;
+                        border-radius: none;
+                        color: none;
+                        padding: 0 0 0 0;
+                        margin: 0 0 0 0;
+                    " method="POST" action="{% url 'quiz:delete_quiz_question' question.id %}">
+                        {% csrf_token %}
+                        <button class="del-button" type="submit">Delete</button>
+                    </form>
+                </td>
+                    {% comment %} <a href=""><button class="del-button">Delete</button></a> {% endcomment %}
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No questions added yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        window.addEventListener('load', function() {
+            const errorMessage = document.getElementById('success-alert');
+            if (errorMessage.innerHTML.trim() !== "") {
+                errorMessage.style.display = "block";
+                setTimeout(function() {
+                    errorMessage.style.display = "none";
+                }, 1000);
+            }
+        });
+    
+        window.addEventListener('load', function() {
+            const errorMessage = document.getElementById('error-alert');
+            if (errorMessage.innerHTML.trim() !== "") {
+                errorMessage.style.display = "block";
+                setTimeout(function() {
+                    errorMessage.style.display = "none";
+                }, 1000);
+            }
+        });
+    
+    </script>
+    {% endblock  %}
+
+
+
+
+

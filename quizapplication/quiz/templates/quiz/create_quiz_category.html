@@ -1,9 +1,45 @@
 {% include 'user_registration/base.html' %}
+<style>
+    .error-alert {
+        margin: 0 auto;
+        color: #e30d0d;
+        border-color: #f36464;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+        text-align: center;
+        display: none;
+      }
+</style> 
 
+{% block body %}
 <h1 class="title">Create Quiz Category</h1>
+<span class="error-alert" id="error-alert">
+    {% if messages %} 
+      {% for message in messages %} 
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+          {{message}}
+        {% endif %} 
+      {% endfor %} 
+    {% endif %}
+  </span>
 
 <form action="" method="POST">
     {% csrf_token %}
     {{form}}
     <input type="submit" value="Create">
 </form>
+
+
+<script>
+    window.addEventListener('load', function() {
+        const errorMessage = document.getElementById('error-alert');
+        if (errorMessage.innerHTML.trim() !== "") {
+            errorMessage.style.display = "block";
+            setTimeout(function() {
+                errorMessage.style.display = "none";
+            }, 1000);
+        }
+    });
+</script>
+{% endblock  %}

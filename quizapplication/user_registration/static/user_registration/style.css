@@ -151,7 +151,7 @@ input[type="submit"]:hover {
   margin: 50px auto;
   border: 2px solid black;
   border-radius: 20px;
-  width: 400px;
+  width: 500px;
   text-align: center;
 }
 
@@ -171,6 +171,13 @@ input[type="submit"]:hover {
 
 .user-profile a:hover {
   background-color: #4c0dde;
+}
+
+.profile-page {
+  display: flex;
+}
+.flex-item {
+  flex:1;
 }
 
 /* index page */
@@ -230,7 +237,7 @@ input[type="submit"]:hover {
 }
 
 .sm-button {
-  width: 250px;
+  width: 200px;
   background-color: #5762d5;
   border: none;
   border-radius: 10px;
@@ -247,13 +254,20 @@ input[type="submit"]:hover {
   cursor: pointer;
 }
 
+.index-buttons {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
 /* Change password html  */
 
 .title {
   text-align: center;
 }
 
-/* Upload Image */
+/* Upload Image buttons */
 .upload-image button {
   background-color: #5762d5;
   padding: 5px 10px;
@@ -269,7 +283,93 @@ input[type="submit"]:hover {
 }
 
 /* Add Quiz Question Page */
-.error-msg {
-  color: red;
-  display: none;
+
+.add-question a {
+  background-color: #5762d5;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #d6e7e7;
+  text-decoration: none;
+  transition-duration: 0.3s;
 }
+
+.add-question a:hover {
+  background-color: #4c0dde;
+}
+
+/* ------ Show quiz Question -------- */
+
+.quiz-question-view {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+.quiz-question-view th,
+.quiz-question-view td {
+  border: 2px solid gray;
+  padding: 10px;
+}
+
+.quiz-question-view th {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.del-button {
+  width: 100px;
+  background-color: #dc5656;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: bold;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+.del-button:hover {
+  background-color: #ee0404;
+  cursor: pointer;
+}
+
+.back-button {
+  margin: 0 50px 0 140px;
+  background-color: #5762d5;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #d6e7e7;
+  text-decoration: none;
+  transition-duration: 0.3s;
+}
+
+.back-button a:hover {
+  background-color: #4c0dde;
+}
+
+/* alert messages  */
+/* .success-del {
+  margin: 2rem auto;
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+} */
+
+/* .error-alert {
+  margin: 2rem auto;
+  background-color: #ebaeae;
+  color: #e30d0d;
+  border-color: #f36464;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  text-align: center;
+} */
