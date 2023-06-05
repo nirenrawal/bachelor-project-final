@@ -44,3 +44,5 @@ class Answer(models.Model):
     
     def __str__(self):
         return f"Question: {self.question.content}, answer: {self.content}, Correct Answer: {self.correct_answer}"
+    
+    

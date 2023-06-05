@@ -20,36 +20,6 @@ function lightMode(){
 }
 
 
-//--------------- Handle error message on create question ---------------------//
 
-// function handleFormSubmit(){
-//     const form = document.getElementById('question-form');
-//     form.addEventListener('submit', async (e) => {
-//         e.preventDefault();
-//         try {
-//             const response = await fetch('add_quiz_question/', {
-//                 method: 'POST',
-//                 body: new FormData(form)
-//             });
-//             if (response.ok) {
-//                 window.location.href = 'add_quiz_question/';
-//             } else {
-//                 const errorData = await response.json();
-//                 const errorMessage = errorData.error_Message;
-//                 const errorElement = document.getElementById('error-msg');
-//                 errorElement.textContent = errorMessage;
-//                 errorElement.style.display = 'block';
-//                 setTimeout(() => {
-//                     errorElement.style.display = 'none';
-//                 }, 2000)
-//             }
-//         } catch (error) {
-//                 console.log('Error', error)
-//             }
-//     });
-// }
-
-// handleFormSubmit()
-
-
+//--------------- Error Alert ---------------------//
 
