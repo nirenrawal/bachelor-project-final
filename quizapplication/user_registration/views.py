@@ -13,15 +13,12 @@ from django import forms
 
 # Create your views here.
 """This function renders homepage"""
-
-
 def index(request):
     return render(request, "user_registration/index.html")
 
 
+
 """This function registers the user."""
-
-
 def register(request):
     registered = False
 
@@ -60,15 +57,8 @@ def register(request):
     )
 
 
-@login_required
-def show_users (request):
-    users = User.objects.all()
-    return render(request, "user_registration/user_profile.html", {'users':users})
-        
 
 """This function logs in"""
-
-
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -88,18 +78,20 @@ def user_login(request):
         return render(request, "user_registration/login.html")
 
 
+
+
+
 """This function logs out"""
-
-
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse("user_registration:index"))
 
 
+
+
+
 """This function renders profile"""
-
-
 @login_required
 def user_profile(request, id):
     try:
@@ -114,9 +106,10 @@ def user_profile(request, id):
         return redirect("user_registration:user_login")
 
 
+
+
+
 """This function updates the password"""
-
-
 @login_required
 def change_password(request, id):
     id = request.user.id
@@ -135,7 +128,10 @@ def change_password(request, id):
     )
 
 
+
+
 """This function updates the image on profile page"""
+@login_required
 def upload_profile_image(request, id):
     from .forms import UserInfoForm
     user = get_object_or_404(User, id=id)
@@ -154,8 +150,10 @@ def upload_profile_image(request, id):
     return render(request, 'user_registration/upload_profile_image.html', {'form':form})
 
 
-"""This function updates profile page"""
 
+
+
+"""This function updates profile page"""
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User

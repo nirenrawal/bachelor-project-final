@@ -1,17 +1,6 @@
 {% include 'user_registration/base.html' %} 
+{% load static %}
 
-<style>
-  .success-alert {
-    margin: 0 auto;
-    color: #155724;
-    border-color: #c3e6cb;
-    padding: 0.75rem 1.25rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    display: none;
-    text-align: center;
-  }
-</style>
 {% block body %}
 
 <div class="success-alert" id="success-alert">
@@ -26,7 +15,6 @@
 
 <section class="index-page">
   
-
   <div class="welcome-section">
     <h1 class="title">
       Welcome {{ user.first_name | capfirst}} to Quiz Application!
@@ -50,15 +38,3 @@
   </div>
 </section>
 {% endblock %}
-
-<script>
-  window.addEventListener('load', function() {
-      const errorMessage = document.getElementById('success-alert');
-      if (errorMessage.innerHTML.trim() !== "") {
-          errorMessage.style.display = "block";
-          setTimeout(function() {
-              errorMessage.style.display = "none";
-          }, 1000);
-      }
-  });
-</script>

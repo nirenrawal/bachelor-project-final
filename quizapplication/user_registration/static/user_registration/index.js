@@ -19,7 +19,25 @@ function lightMode(){
     introText.style.color="#3c404a"
 }
 
+// ----------- Success & Error Alerts -------
 
+window.addEventListener('load', function() {
+    const errorMessage = document.getElementById('success-alert');
+    if (errorMessage.innerHTML.trim() !== "") {
+        errorMessage.style.display = "block";
+        setTimeout(function() {
+            errorMessage.style.display = "none";
+        }, 2000);
+    }
+});
 
-//--------------- Error Alert ---------------------//
+window.addEventListener('load', function() {
+    const errorMessage = document.getElementById('error-alert');
+    if (errorMessage.innerHTML.trim() !== "") {
+        errorMessage.style.display = "block";
+        setTimeout(function() {
+            errorMessage.style.display = "none";
+        }, 2000);
+    }
+});
 
