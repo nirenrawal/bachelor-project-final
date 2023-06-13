@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .form import QuizCategoryForm, QuestionForm
 from django.contrib.auth.decorators import login_required
 from .models import Question, QuizCategory
@@ -68,5 +68,16 @@ def delete_quiz_question(request, question_id):
         messages.error(request, "The quiz question does not exist.")
     return redirect('quiz:show_quiz_question')
     
+@login_required
+def update_quiz_category(request, id):
+    quiz_category = get_object_or_404(QuizCategory, id=id)
+    if request.method == 'POST':
+        form = QuizCategoryForm(request.POST, instance=quiz_category)
+        if form.is_valid():
+            quiz_category = form.save()
+            return render(request, "quiz/update_quiz_category.html", {'quiz_category': quiz_category})
+    else:
+        form = QuizCategoryForm(instance=quiz_category)
+    return render(request, "quiz/update_quiz_category.html", {'form': form})
 
 
