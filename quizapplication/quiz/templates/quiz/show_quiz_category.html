@@ -1,0 +1,85 @@
+{% include 'user_registration/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="success-alert" id="success-alert">
+    {% if messages %} 
+      {% for message in messages %} 
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
+          {{message}}
+        {% endif %} 
+      {% endfor %} 
+    {% endif %}
+  </div> 
+  <div class="error-alert" id="error-alert">
+    {% if messages %} 
+      {% for message in messages %} 
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
+          {{message}}
+        {% endif %} 
+      {% endfor %} 
+    {% endif %}
+  </div> 
+
+  
+    <h1 class="title">Quiz Categories</h1>
+    <a class='back-button' href="{% url 'quiz:add_quiz_question' %}">Back</a>
+    <table class="quiz-question-view">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Number of Questions</th>
+                <th>Time in Sec.</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz_category in quiz_categories %}
+            <tr>
+                <td>{{ quiz_category.name }}</td>
+                <td style="text-align:center;">{{ quiz_category.number_of_questions }}</td>
+                <td style="text-align:center;"> {{ quiz_category.time }}</td>
+                <td style="text-align:center;">
+                    
+                    <form style="
+                        width: 40px;
+                        background-color: none;
+                        border: none;
+                        border-radius: none;
+                        color: none;
+                        padding: 0 0 0 0;
+                        margin: 0 0 0 0;
+                    " method="POST" action="{% url 'quiz:update_quiz_category' quiz_category.id %}">
+                        {% csrf_token %}
+                        <button style="background-color:green;" class="del-button" type="submit">Update</button>
+                    </form> <br>
+                    <form style="
+                    width: 40px;
+                    background-color: none;
+                    border: none;
+                    border-radius: none;
+                    color: none;
+                    padding: 0 0 0 0;
+                    margin: 0 0 0 0;
+                " method="POST" action="{% url 'quiz:delete_quiz_category' quiz_category.id %}">
+                    {% csrf_token %}
+                    <button style="background-color:red;" class="del-button" type="submit">Delete</button>
+                </form>
+                </td>
+                    
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No questions added yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+  
+    {% endblock  %}
+
+
+
+
+

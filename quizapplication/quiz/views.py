@@ -67,17 +67,44 @@ def delete_quiz_question(request, question_id):
     except Question.DoesNotExist:
         messages.error(request, "The quiz question does not exist.")
     return redirect('quiz:show_quiz_question')
+
+
+@login_required
+def delete_quiz_category(request, category_id):
+    try:
+        category = QuizCategory.objects.get(id=category_id)
+        category.delete()
+        messages.success(request, "The quiz category has been deleted successfully.")
+    except Question.DoesNotExist:
+        messages.error(request, "The quiz category does not exist.")
+    return redirect('quiz:show_quiz_category')
+
+
     
 @login_required
-def update_quiz_category(request, id):
-    quiz_category = get_object_or_404(QuizCategory, id=id)
+def update_quiz_category(request, category_id):
+    quiz_category = get_object_or_404(QuizCategory, id=category_id)
+    
     if request.method == 'POST':
         form = QuizCategoryForm(request.POST, instance=quiz_category)
         if form.is_valid():
-            quiz_category = form.save()
-            return render(request, "quiz/update_quiz_category.html", {'quiz_category': quiz_category})
+            category_name = form.cleaned_data['name']
+            if not QuizCategory.objects.filter(name=category_name).exclude(id=category_id).exists():
+                form.save()
+                messages.success(request, "The quiz category has been updated successfully.")
+                return redirect('quiz:quiz_index')
+            else:
+                messages.error(request, "The quiz category already exists.")
+        else:
+            messages.error(request, "The form data is invalid.")
     else:
         form = QuizCategoryForm(instance=quiz_category)
     return render(request, "quiz/update_quiz_category.html", {'form': form})
+
+
+@login_required
+def show_quiz_category(request):
+    quiz_categories = QuizCategory.objects.all()
+    return render(request, "quiz/show_quiz_category.html", {'quiz_categories':quiz_categories})
 
 
