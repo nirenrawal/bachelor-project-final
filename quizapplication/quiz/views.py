@@ -5,6 +5,7 @@ from .models import Question, QuizCategory
 from django.contrib import messages
 
 
+
 @login_required
 def quiz_index(request):
     return render(request, "quiz/quiz_index.html")
@@ -80,6 +81,15 @@ def delete_quiz_category(request, category_id):
     return redirect('quiz:show_quiz_category')
 
 
+@login_required
+def show_quiz_category(request):
+    quiz_categories = QuizCategory.objects.all()
+    return render(request, "quiz/show_quiz_category.html", {'quiz_categories':quiz_categories})
+
+ 
+ 
+ 
+
     
 @login_required
 def update_quiz_category(request, category_id):
@@ -92,19 +102,21 @@ def update_quiz_category(request, category_id):
             if not QuizCategory.objects.filter(name=category_name).exclude(id=category_id).exists():
                 form.save()
                 messages.success(request, "The quiz category has been updated successfully.")
-                return redirect('quiz:quiz_index')
+                return redirect('quiz:show_quiz_category')
             else:
                 messages.error(request, "The quiz category already exists.")
         else:
             messages.error(request, "The form data is invalid.")
     else:
-        form = QuizCategoryForm(instance=quiz_category)
+        initial_val = {
+            'name': quiz_category.name,
+            'description': quiz_category.description,
+            'number_of_questions': quiz_category.number_of_questions,
+            'time': quiz_category.time,
+        }
+        form = QuizCategoryForm(instance=quiz_category, initial=initial_val)
     return render(request, "quiz/update_quiz_category.html", {'form': form})
 
 
-@login_required
-def show_quiz_category(request):
-    quiz_categories = QuizCategory.objects.all()
-    return render(request, "quiz/show_quiz_category.html", {'quiz_categories':quiz_categories})
 
 

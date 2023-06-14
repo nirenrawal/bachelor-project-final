@@ -23,12 +23,13 @@
 
   
     <h1 class="title">Quiz Categories</h1>
-    <a class='back-button' href="{% url 'quiz:add_quiz_question' %}">Back</a>
+    <a class='back-button' href="{% url 'quiz:quiz_index' %}">Home</a>
     <table class="quiz-question-view">
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Number of Questions</th>
+                <th>Description</th>
+                <th>No. of Ques.</th>
                 <th>Time in Sec.</th>
                 <th></th>
             </tr>
@@ -37,9 +38,10 @@
             {% for quiz_category in quiz_categories %}
             <tr>
                 <td>{{ quiz_category.name }}</td>
+                <td>{{ quiz_category.description }}</td>
                 <td style="text-align:center;">{{ quiz_category.number_of_questions }}</td>
                 <td style="text-align:center;"> {{ quiz_category.time }}</td>
-                <td style="text-align:center;">
+                <td style="text-align:center; width:100px">
                     
                     <form style="
                         width: 40px;
