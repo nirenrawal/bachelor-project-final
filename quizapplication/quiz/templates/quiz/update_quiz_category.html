@@ -15,24 +15,22 @@
 
 <h1 class="title">Update Quiz Category</h1>
 
-
-
-    {% csrf_token %}
     <form action="" method="POST">
       {% csrf_token %}
-      {{ form.name.label_tag }}
-      {{ form.name }}
-      {{ form.description.label_tag }}
-      {{ form.description }}
-      {{ form.number_of_questions.label_tag}}
-      {{ form.number_of_questions }}
-      {{ form.time.label_tag }}
-      {{ form.time }}
-      <input type="submit" value='Update'>
-    </form>
-  
-
-
-
+      <label for="id_name">Name:</label>
+      <input type="text" id="id_name" name="name" value="{{ form.initial.name }}">
+      
+      <label for="id_description">Description:</label>
+      <textarea id="id_description" name="description">{{ form.initial.description }}</textarea>
+      
+      <label for="id_number_of_questions">Number of Questions:</label>
+      <input type="number" id="id_number_of_questions" name="number_of_questions" value="{{ form.initial.number_of_questions }}">
+      
+      <label for="id_time">Time:</label>
+      <input type="text" id="id_time" name="time" value="{{ form.initial.time }}">
+      
+      <input type="submit" value="Update">
+    </form> 
 
 {% endblock %}
+
