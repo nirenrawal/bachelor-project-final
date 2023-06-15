@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .form import QuizCategoryForm, QuestionForm
 from django.contrib.auth.decorators import login_required
-from .models import Question, QuizCategory
+from .models import Question, QuizCategory, Answer
 from django.contrib import messages
+from django.forms import inlineformset_factory, formset_factory
 
 
 
@@ -119,4 +120,17 @@ def update_quiz_category(request, category_id):
 
 
 
-
+@login_required
+def add_answer_to_questions(request, question_id):
+    question = Question.objects.get(id=question_id)
+    question_form_set = inlineformset_factory(Question, Answer, fields=('content', 'correct_answer', 'question'), extra=4, max_num=4)
+    if request.method == 'POST':
+        form = question_form_set(request.POST, instance=question)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Added Successfully.")
+            return redirect('quiz:show_quiz_question')
+    else:
+        form = question_form_set(instance=question)
+    return render(request, "quiz/add_answer_to_questions.html", {'form':form, 'question':question})
+    
