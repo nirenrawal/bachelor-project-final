@@ -29,16 +29,17 @@
             <tr>
                 <th>Question</th>
                 <th>Category</th>
-                <th></th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             {% for question in questions %}
             <tr>
-                <td>{{ question.content }}</td>
+               <td><a href="{% url 'quiz:add_answer_to_questions' question.id %}">{{ question.id }} - {{ question.content }}</a> </td>
                 <td style="text-align:center;">{{ question.quiz_category }}</td>
                 <td style="text-align:center;">
                     <form style="
+                        margin:auto;
                         width: 40px;
                         background-color: none;
                         border: none;
