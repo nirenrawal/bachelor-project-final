@@ -5,6 +5,7 @@ venv/
 .env
 db.sqlite3
 media/
+.DS_Store
 ../.DS_Store
 quiz/__pycache__/
 quiz/migrations/__pycache__/
