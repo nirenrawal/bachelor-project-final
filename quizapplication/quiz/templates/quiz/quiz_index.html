@@ -20,8 +20,8 @@
       Welcome {{ user.first_name | capfirst}} to Quiz Application!
     </h1>
     <h3>Play Online Quiz And Have Fun With Your Family & Friends</h3>
-    <input class type="text" placeholder="@User name" />
-    <button class="sm-button">Get Started</button>
+    {% comment %} <input class type="text" placeholder="@User name" /> {% endcomment %}
+    <a href="{% url 'user_registration:user_list' %}"><button class="sm-button">See User List</button></a>
   </div>
 
   <div

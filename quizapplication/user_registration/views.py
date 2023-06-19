@@ -79,8 +79,6 @@ def user_login(request):
 
 
 
-
-
 """This function logs out"""
 @login_required
 def user_logout(request):
@@ -197,5 +195,7 @@ def update_profile(request, id):
     )
     
     
-   
-        
+@login_required 
+def user_list(request):
+    users = User.objects.select_related("userinfo").exclude(username='admin')
+    return render(request, "user_registration/user_list.html", {'users':users})
