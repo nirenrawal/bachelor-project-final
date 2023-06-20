@@ -6,7 +6,9 @@
     {% block title %}Login{% endblock %}
     {% block body %}
 
-    <section>
+    {% include "includes/error.html" %}
+        
+
         <h1 class="title">Please Login!</h1>
     <form action="{% url 'user_registration:user_login' %}" method="POST">
         {% csrf_token %}

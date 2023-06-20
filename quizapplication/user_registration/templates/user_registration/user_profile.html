@@ -7,10 +7,11 @@
 
 {% block body %}
 
+{% include "includes/error.html" %}
+
 <div class="profile-page">
   <div class="flex-item">
     <div class="user-profile">
-      {% comment %} <button id="show-users-modal-btn" type="button">Show Users</button> {% endcomment %}
       <h1 class="title">User Profile</h1>
       <p><strong>Username:</strong> @<em>{{ user.username }}</em></p>
       <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>

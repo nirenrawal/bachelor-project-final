@@ -51,7 +51,7 @@ body {
   position: absolute;
   display: none;
   border-radius: 8px;
-  top: 35px;
+  top: 30px;
 }
 
 .dropdown li+li {
@@ -617,6 +617,10 @@ input[type="submit"]:hover {
     font-size: 80%;
   }
 
+  .user-card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
 }
 
 
@@ -624,6 +628,10 @@ input[type="submit"]:hover {
 @media (max-width: 460px) {
   form {
     width: 70%;
+  }
+
+  .user-card {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
