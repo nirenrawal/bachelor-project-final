@@ -3,15 +3,7 @@
 
 {% block body %}
 
-<div class="success-alert" id="success-alert">
-  {% if messages %} 
-    {% for message in messages %} 
-      {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
-        {{message}}
-      {% endif %} 
-    {% endfor %} 
-  {% endif %}
-</div>
+{% include "includes/error.html" %}
 
 <section class="index-page">
   

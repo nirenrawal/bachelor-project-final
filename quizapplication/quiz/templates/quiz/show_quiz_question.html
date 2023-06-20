@@ -2,24 +2,7 @@
 {% load static %}
 
 {% block body %}
-<div class="success-alert" id="success-alert">
-    {% if messages %} 
-      {% for message in messages %} 
-        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %} 
-          {{message}}
-        {% endif %} 
-      {% endfor %} 
-    {% endif %}
-  </div> 
-  <div class="error-alert" id="error-alert">
-    {% if messages %} 
-      {% for message in messages %} 
-        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
-          {{message}}
-        {% endif %} 
-      {% endfor %} 
-    {% endif %}
-  </div> 
+{% include "includes/error.html" %}
 
 
     <h1 class="title">Quiz Questions</h1>
