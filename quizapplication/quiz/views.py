@@ -128,7 +128,7 @@ def add_answer_to_questions(request, question_id):
         form = question_form_set(request.POST, instance=question)
         if form.is_valid():
             form.save()
-            messages.success(request, "Added Successfully.")
+            messages.success(request, "Your answers has been added successfully.")
             return redirect('quiz:show_quiz_question')
     else:
         form = question_form_set(instance=question)

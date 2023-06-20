@@ -1,16 +1,9 @@
 {% include 'user_registration/base.html' %}
 {% load static %}
-
 {% block body %}
-<div class="error-alert" id="error-alert">
-  {% if messages %} 
-    {% for message in messages %} 
-      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} 
-        {{message}}
-      {% endif %} 
-    {% endfor %} 
-  {% endif %}
-</div>
+{% include "includes/error.html" %}
+
+
 <h1 class="title">Create Quiz Category</h1>
 
 
