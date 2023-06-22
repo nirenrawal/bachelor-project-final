@@ -1,5 +1,5 @@
 from django import forms
-from .models import QuizCategory, Question, Answer
+from .models import QuizCategory, Question
 
 class QuizCategoryForm(forms.ModelForm):
     class Meta:

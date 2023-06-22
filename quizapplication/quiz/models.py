@@ -1,6 +1,5 @@
 from django.db import models
-
-
+from django.contrib.auth.models import User
 
 class QuizCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -44,5 +43,14 @@ class Answer(models.Model):
     
     def __str__(self):
         return f"Question: {self.question.content}, answer: {self.content}, Correct Answer: {self.correct_answer}"
+    
+
+class UserScore(models.Model):
+    quiz_category = models.ForeignKey(QuizCategory, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    
+    def __str__(self):
+        return f"{self.user} - {self.quiz_category}"
     
     
