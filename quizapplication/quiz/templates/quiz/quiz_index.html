@@ -1,6 +1,11 @@
 {% include 'user_registration/base.html' %} 
 {% load static %}
+<style>
+  
 
+
+  
+</style>
 {% block body %}
 
 {% include "includes/error.html" %}
@@ -16,17 +21,23 @@
     <a href="{% url 'user_registration:user_list' %}"><button class="sm-button">See User List</button></a>
   </div>
 
-  <div
-    style="
-      background-color: red;
-      width: 500px;
-      border: 5px solid black;
-      color: white;
-      text-align: center;
-      font-size: 50px;
-    "
-  >
-    <p>The is were the content is going to be</p>
+  
+<div class="card-box" style="display:flex; flex-wrap:wrap;justify-content:space-between; flex-basis: calc(33.33% - 10px);">
+
+  {% for category in quiz_categories %}
+  
+  <div class="play-quiz">
+    <div class="card-2">
+      <h3>{{ category.name }}</h3>
+   
+      <a style="text-decoration: none; color:black; font-weight:900" href="{% url 'quiz:view_quiz' category.id %}"><input style="width:100px; font-size:12px;" type="submit" value="Play Quiz"></a>
+    </div>
   </div>
+
+{% endfor %}
+
+</div>
+  
+  
 </section>
 {% endblock %}
