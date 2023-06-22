@@ -1,0 +1,121 @@
+{% include 'user_registration/base.html' %}
+{% load static %}
+{% block body %}
+{% include "includes/error.html" %}
+
+
+<h1 class="title">Create Quiz Category</h1>
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+    <label for="category">Category</label>
+    <select name="category" id="category">
+        <option value="history">History</option>
+        <option value="maths">Maths</option>
+        <option value="geography">Geography</option>
+    </select><br>
+
+    <label for="duration">Duration</label>
+    <input type="number" id="duration" name="duration"> 
+
+    <label for="continuable">Continuable</label>
+    <select name="continuable" id="continuable">
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select><br>
+
+    <hr>
+
+    <div>
+        <label for="question_0">Question 1</label>
+        <input type="text" id="question_0" name="question_0"> 
+        
+        <div>
+            <label for="0_answer_0">Answer A</label>
+            <input type="text" id="0_answer_0" name="0_answer_0"> 
+
+            <label for="0_answer_1">Answer B</label>
+            <input type="text" id="0_answer_1" name="0_answer_1"> 
+
+            <label for="0_answer_2">Answer C</label>
+            <input type="text" id="0_answer_2" name="0_answer_2"> 
+
+            <label for="0_answer_3">Answer D</label>
+            <input type="text" id="0_answer_3" name="0_answer_3">
+            {% comment %} <input type="submit" value="Add answer" id="add_answer"> {% endcomment %}
+        </div>
+    </div>
+
+    <hr>
+
+    <div>
+        <label for="question_1">Question 2</label>
+        <input type="text" id="question_1" name="question_1"> 
+        
+        <div>
+            <label for="1_answer_0">Answer A</label>
+            <input type="text" id="1_answer_0" name="1_answer_0"> 
+
+            <label for="1_answer_1">Answer B</label>
+            <input type="text" id="1_answer_1" name="1_answer_1"> 
+
+            <label for="1_answer_2">Answer C</label>
+            <input type="text" id="1_answer_2" name="1_answer_2"> 
+
+            <label for="1_answer_3">Answer D</label>
+            <input type="text" id="1_answer_3" name="1_answer_3">
+            {% comment %} <input type="submit" value="Add answer" id="add_answer"> {% endcomment %}
+        </div>
+    </div>
+
+    <hr>
+
+    <div>
+        <label for="question_2">Question 3</label>
+        <input type="text" id="question_2" name="question_2"> 
+        
+        <div>
+            <label for="2_answer_0">Answer A</label>
+            <input type="text" id="2_answer_0" name="2_answer_0"> 
+
+            <label for="2_answer_1">Answer B</label>
+            <input type="text" id="2_answer_1" name="2_answer_1"> 
+
+            <label for="2_answer_2">Answer C</label>
+            <input type="text" id="2_answer_2" name="2_answer_2"> 
+
+            <label for="2_answer_3">Answer D</label>
+            <input type="text" id="2_answer_3" name="2_answer_3">
+            {% comment %} <input type="submit" value="Add answer" id="add_answer"> {% endcomment %}
+        </div>
+    </div>
+
+    <hr>
+    
+    <div>
+        <label for="question_3">Question 4</label>
+        <input type="text" id="question_3" name="question_3"> 
+        
+        <div>
+            <label for="3_answer_0">Answer A</label>
+            <input type="text" id="3_answer_0" name="3_answer_0"> 
+
+            <label for="3_answer_1">Answer B</label>
+            <input type="text" id="3_answer_1" name="3_answer_1"> 
+
+            <label for="3_answer_2">Answer C</label>
+            <input type="text" id="3_answer_2" name="3_answer_2"> 
+
+            <label for="3_answer_3">Answer D</label>
+            <input type="text" id="3_answer_3" name="3_answer_3">
+            {% comment %} <input type="submit" value="Add answer" id="add_answer"> {% endcomment %}
+        </div>
+    </div>
+
+    {% comment %} <input type="submit" value="Add question" id="add_question"> {% endcomment %}
+
+    <input type="submit" value="Create">
+</form>
+{% endblock  %}

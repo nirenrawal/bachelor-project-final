@@ -1,43 +1,87 @@
+from http import client
 from django.shortcuts import render, redirect, get_object_or_404
-from .form import QuizCategoryForm, QuestionForm
 from django.contrib.auth.decorators import login_required
-from .models import Question, QuizCategory, Answer, UserScore
 from django.contrib import messages
 from django.forms import inlineformset_factory
 
-
-
-
+from utils import get_db_handle
 
 @login_required
 def quiz_index(request):
-    quiz_categories = QuizCategory.objects.all()
-    return render(request, "quiz/quiz_index.html", {'quiz_categories':quiz_categories})
+    db_handle = get_db_handle()[0]
+
+    items = db_handle.quizes.find({})
+    quizes = list()
+
+    for item in items:
+        id = item.pop('_id')
+        item['id'] = id
+        quizes.append(item)
+    return render(request, "quiz/quiz_index.html", {'quizes' : quizes })
 
 """ This function creates quiz category """
 
 @login_required
-def create_quiz_category(request):
+def create_quiz(request):
+    if request.method == 'GET':
+        return render(request, 'quiz/create_quiz.html')
     if request.method == 'POST':
-        form = QuizCategoryForm(request.POST)
-        if form.is_valid():
-            category_name = form.cleaned_data['name']
-            if not QuizCategory.objects.filter(name=category_name).exists():
-                form.save()
-                messages.success(request, "Your Quiz Category Has Been Created.")
-                return redirect('quiz:quiz_index')
-            else:
-                messages.error(request, "The Quiz Category Already Exists.")
-        else:
-            messages.error(request, "Your Form Data Is Invalid.")
-    else:
-        form = QuizCategoryForm()
-    return render(request, 'quiz/create_quiz_category.html', {'form': form})
+        category = request.POST['category']
+        current_user = request.user.id
+        continuable = request.POST['continuable']
+        duration = request.POST['duration']
+        # set of questions and answers
+        question_0 = request.POST['question_0']
+        answer_0_A = request.POST['0_answer_0']
+        answer_0_B = request.POST['0_answer_1']
+        answer_0_C = request.POST['0_answer_2']
+        answer_0_D = request.POST['0_answer_3']
 
+        question_1 = request.POST['question_0']
+        answer_1_A = request.POST['1_answer_0']
+        answer_1_B = request.POST['1_answer_1']
+        answer_1_C = request.POST['1_answer_2']
+        answer_1_D = request.POST['1_answer_3']
 
+        question_2 = request.POST['question_0']
+        answer_2_A = request.POST['2_answer_0']
+        answer_2_B = request.POST['2_answer_1']
+        answer_2_C = request.POST['2_answer_2']
+        answer_2_D = request.POST['2_answer_3']
 
+        question_3 = request.POST['question_0']
+        answer_3_A = request.POST['3_answer_0']
+        answer_3_B = request.POST['3_answer_1']
+        answer_3_C = request.POST['3_answer_2']
+        answer_3_D = request.POST['3_answer_3']
 
+        new_quiz = {
+            "category": category, 
+            "maker": current_user,
+            "continuable": continuable,
+            "duration": duration,
+            "questions": [
+                [
+                    question_0, answer_0_A, answer_0_B, answer_0_C, answer_0_D
+                ],
+                [
+                    question_1, answer_1_A, answer_1_B, answer_1_C, answer_1_D
+                ],
+                [
+                    question_2, answer_2_A, answer_2_B, answer_2_C, answer_2_D
+                ],
+                [
+                    question_3, answer_3_A, answer_3_B, answer_3_C, answer_3_D
+                ]
+            ]    
+        }
 
+        db_handle = get_db_handle()[0]
+
+        inserted = db_handle.quizes.insert_one(new_quiz)
+        if inserted:
+            return render(request, 'user_registration/index.html')
+        # raise error
 
 """ This function adds quizes in database """
 @login_required

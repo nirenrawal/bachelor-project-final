@@ -42,11 +42,11 @@
             <a href="#">Quiz <i class="fa fa-sort-down"></i> </a>
 
             <ul class="dropdown">
-              <li><a class='dropdown-link' href="{% url 'quiz:create_quiz_category' %}">Create Category</a></li>
-              <li><a class='dropdown-link' href="{% url 'quiz:add_quiz_question' %}">Add Questions</a></li>
+              <li><a class='dropdown-link' href="{% url 'quiz:create_quiz' %}">Create Quiz</a></li>
+              {% comment %} <li><a class='dropdown-link' href="{% url 'quiz:add_quiz_question' %}">Add Questions</a></li>
               <li><a class='dropdown-link' href="{% url 'quiz:show_quiz_category' %}">Show Quiz Category</a></li>
               <li><a class='dropdown-link' href="{% url 'quiz:show_quiz_question' %}">Show Quiz Question</a></li>
-              <li><a class='dropdown-link' href="{% url 'user_registration:user_list' %}">Show User List</a></li>
+              <li><a class='dropdown-link' href="{% url 'user_registration:user_list' %}">Show User List</a></li> {% endcomment %}
             </ul>
           </li>
            <li><a href="{% url 'user_registration:user_logout' %}">Logout</a></li>
@@ -85,5 +85,6 @@
     
     {% block body %}{% endblock %}
     <script src="{% static 'user_registration/index.js' %}"></script>
+    <script src="{% static 'quiz/index.js' %}"></script>
 </body>
 </html>
